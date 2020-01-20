@@ -28,7 +28,13 @@ export class ProfilePage {
         .subscribe(response => {
           this.usuario = response;
         },
-        error => {});
+        error => {
+          if (error.status == 403) {
+            this.navCtrl.setRoot('HomePage');
+          }
+        });
+    } else {
+      this.navCtrl.setRoot('HomePage');
     }
   }
 
