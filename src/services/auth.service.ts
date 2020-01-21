@@ -23,6 +23,16 @@ export class AuthService {
             });
     }
 
+    refreshToken() {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/refreshToken`,
+            {},
+            {
+                observe: 'response',
+                responseType: 'text'
+            });
+    }
+
     successfulLogin(authorizationValue: string) {
         const token = authorizationValue.substring(7);
         const user: LocalUser = {

@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
@@ -18,7 +19,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
-    public auth: AuthService
+    public auth: AuthService,
+    public storage: StorageService
   ) {}
 
   ionViewWillEnter() {
@@ -27,6 +29,17 @@ export class HomePage {
 
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
+  }
+
+  ionViewDidEnter() {
+    if (this.storage.getLocalUser()) {
+      this.auth.refreshToken()
+        .subscribe(response => {
+          this.auth.successfulLogin(response.headers.get('Authorization'))
+          this.navCtrl.setRoot('CategoriasPage');
+        },
+        error => {});
+    }
   }
 
   login() {
