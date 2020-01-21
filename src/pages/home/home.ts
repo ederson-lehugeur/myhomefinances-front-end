@@ -32,7 +32,7 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    if (this.storage.getLocalUser()) {
+    if (this.storage.localUserIsDefined()) {
       this.auth.refreshToken()
         .subscribe(response => {
           this.auth.successfulLogin(response.headers.get('Authorization'))

@@ -18,4 +18,8 @@ export class StorageService {
     deleteLocalUser() {
         localStorage.removeItem(STORAGE_KEYS.localUser);
     }
+
+    localUserIsDefined() : Boolean {
+        return this.getLocalUser() == null ? false : true;
+    }
 }
