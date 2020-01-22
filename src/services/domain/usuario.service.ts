@@ -14,4 +14,15 @@ export class UsuarioService {
         return this.http.get<UsuarioDTO>(
             `${API_CONFIG.baseUrl}/usuarios/email?email=${email}`);
     }
+
+    insert(usuario: UsuarioDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/usuarios`,
+            usuario,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        )
+    }
 }
