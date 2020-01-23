@@ -31,8 +31,4 @@ export class CategoriasPage {
       error => {});
   }
 
-  showItens() {
-    this.navCtrl.push("ItensPage");
-  }
-
 }

@@ -1,3 +1,14 @@
 page-itens {
-
+    #nomeDoItem {
+        float: left;
+    }
+    #nomeDaCategoria {
+        float: right;
+    }
+    #complementoDoItem {
+        clear: both;
+    }
+    small {
+        font-size: 0.7em;
+    }
 }
