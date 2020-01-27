@@ -11,6 +11,7 @@ import { ItemService } from '../../services/domain/item.service';
 export class ItensPage {
 
   itens: ItemDTO[];
+  itensPorCategoria = new Map();
 
   constructor(
     public navCtrl: NavController,
@@ -19,7 +20,7 @@ export class ItensPage {
   ) { }
 
   ionViewWillEnter() {
-    this.loadItens();
+    this.loadItems();
   }
 
   newItem() {
@@ -28,17 +29,39 @@ export class ItensPage {
 
   deleteItem(itemId: string) {
     this.itemService.delete(itemId)
-      .subscribe(() => this.loadItens());
+      .subscribe(() => this.loadItems());
   }
 
   editItem(item: ItemDTO) {
     this.navCtrl.push('EditItemPage', item);
   }
 
-  loadItens() {
+  loadItems() {
     this.itemService.findAll()
-      .subscribe(response => this.itens = response,
+      .subscribe(response => {
+        this.itens = response;
+        this.itensPorCategoria.clear();
+        this.itemsGroupByCategoria();
+      },
         error => console.log(error));
+  }
+
+  itemsGroupByCategoria() {
+    this.itens.map(item => {
+      if (this.itensPorCategoria.has(item.categoria.nome)) {
+        this.itensPorCategoria.get(item.categoria.nome).push(item);
+      } else {
+        this.itensPorCategoria.set(item.categoria.nome, [item]);
+      }
+    })
+  }
+
+  getValuesFromItemsGroupByCategoria(key: string): Array<ItemDTO> {
+    return this.itensPorCategoria.get(key);
+  }
+
+  getKeysFromItemsGroupByCategoria(): Array<string> {
+    return Array.from(this.itensPorCategoria.keys());
   }
 
 }

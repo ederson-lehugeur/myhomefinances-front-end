@@ -12,7 +12,7 @@ export class MyApp {
 
   rootPage: string = 'HomePage';
 
-  pages: Array<{title: string, component: string}>;
+  pages: Array<{ title: string, component: string }>;
 
   constructor(
     public platform: Platform,
@@ -25,8 +25,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Profile', component: 'ProfilePage' },
-      { title: 'Categoria', component: 'CategoriasPage' },
       { title: 'Itens', component: 'ItensPage' },
+      { title: 'Categoria', component: 'CategoriasPage' },
       { title: 'Logout', component: '' }
     ];
   }

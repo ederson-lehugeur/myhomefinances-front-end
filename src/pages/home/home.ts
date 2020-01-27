@@ -21,7 +21,7 @@ export class HomePage {
     public menu: MenuController,
     public auth: AuthService,
     public storage: StorageService
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
@@ -36,9 +36,9 @@ export class HomePage {
       this.auth.refreshToken()
         .subscribe(response => {
           this.auth.successfulLogin(response.headers.get('Authorization'))
-          this.navCtrl.setRoot('CategoriasPage');
+          this.navCtrl.setRoot('ItensPage');
         },
-        error => {});
+          error => { });
     }
   }
 
@@ -46,9 +46,9 @@ export class HomePage {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'))
-        this.navCtrl.setRoot('CategoriasPage');
+        this.navCtrl.setRoot('ItensPage');
       },
-      error => {});
+        error => { });
   }
 
   signup() {
