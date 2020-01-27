@@ -1,12 +1,18 @@
 page-itens {
-    #nomeDoItem {
+    #itemNome {
         float: left;
     }
-    #nomeDaCategoria {
+    #itemCategoriaNome {
         float: right;
     }
-    #complementoDoItem {
-        clear: both;
+    #itemComplemento {
+        clear:both;
+    }
+    #buttonCreate {
+        float: right;
+    }
+    #buttonTrash {
+        float: right;
     }
     small {
         font-size: 0.7em;

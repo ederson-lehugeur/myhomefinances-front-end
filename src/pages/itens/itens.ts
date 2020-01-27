@@ -16,12 +16,29 @@ export class ItensPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public itemService: ItemService
-  ) {}
+  ) { }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    this.loadItens();
+  }
+
+  newItem() {
+    this.navCtrl.push('NewItemPage');
+  }
+
+  deleteItem(itemId: string) {
+    this.itemService.delete(itemId)
+      .subscribe(() => this.loadItens());
+  }
+
+  editItem(item: ItemDTO) {
+    this.navCtrl.push('EditItemPage', item);
+  }
+
+  loadItens() {
     this.itemService.findAll()
       .subscribe(response => this.itens = response,
-      error => {});
+        error => console.log(error));
   }
 
 }
