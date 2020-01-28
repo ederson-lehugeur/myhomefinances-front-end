@@ -1,53 +1,53 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CategoriaDTO } from '../../models/categoria.dto';
-import { ItemService } from '../../services/domain/item.service';
 import { CategoriaService } from '../../services/domain/categoria.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-new-item',
-  templateUrl: 'new-item.html',
+  selector: 'page-edit-categoria',
+  templateUrl: 'edit-categoria.html',
 })
-export class NewItemPage {
+export class EditCategoriaPage {
 
   formGroup: FormGroup;
-  categorias: CategoriaDTO[];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    public itemService: ItemService,
     public categoriaService: CategoriaService,
     public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuilder.group({
+      id: ['', [Validators.required]],
       nome: ['', [Validators.required, Validators.maxLength(120)]],
-      complemento: ['', [Validators.maxLength(120)]],
-      categoriaId: ['', [Validators.required]]
+      complemento: ['', [Validators.maxLength(120)]]
     });
   }
 
   ionViewDidLoad() {
-    this.categoriaService.findAll()
-      .subscribe(response => this.categorias = response,
+    this.loadFormGroup();
+  }
+
+  loadFormGroup() {
+    this.formGroup.setValue({
+      id: this.navParams.get('id'),
+      nome: this.navParams.get('nome'),
+      complemento: this.navParams.get('complemento')
+    });
+  }
+
+  updateCategoria() {
+    this.categoriaService.update(this.formGroup.value)
+      .subscribe(() => this.showUpdateOk(),
         error => console.log(error));
   }
 
-  createItem() {
-    this.itemService.insert(this.formGroup.value)
-      .subscribe(() => {
-        this.showInsertOk();
-      },
-        error => console.log(error));
-  }
-
-  showInsertOk() {
+  showUpdateOk() {
     const alert = this.alertCtrl.create({
       title: 'Sucesso',
-      message: 'Item cadastrado com sucesso!',
+      message: 'Categoria atualizada com sucesso!',
       enableBackdropDismiss: false,
       buttons: [
         {

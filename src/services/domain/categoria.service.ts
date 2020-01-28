@@ -7,9 +7,41 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class CategoriaService {
 
-    constructor(public http: HttpClient) {}
+    constructor(public http: HttpClient) { }
 
-    findAll() : Observable<CategoriaDTO[]> {
+    findAll(): Observable<CategoriaDTO[]> {
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
+    }
+
+    insert(categoria: CategoriaDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/categorias`,
+            categoria,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
+
+    delete(categoriaId: string) {
+        return this.http.delete(
+            `${API_CONFIG.baseUrl}/categorias/${categoriaId}`,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
+
+    update(categoria: CategoriaDTO) {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/categorias/${categoria.id}`,
+            categoria,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
     }
 }

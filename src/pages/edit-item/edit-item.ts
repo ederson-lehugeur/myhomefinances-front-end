@@ -59,7 +59,7 @@ export class EditItemPage {
   showUpdateOk() {
     const alert = this.alertCtrl.create({
       title: 'Sucesso',
-      message: 'Item atualizado com sucesso',
+      message: 'Item atualizado com sucesso!',
       enableBackdropDismiss: false,
       buttons: [
         {

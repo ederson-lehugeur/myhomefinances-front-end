@@ -12,6 +12,17 @@
     <ion-item *ngFor="let categoria of categorias">
       <h2>{{ categoria.nome }}</h2>
       <p>{{ categoria.complemento }}</p>
+
+      <div class="item-note" item-end>
+        <button ion-button clear (click)="editCategoria(categoria)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button clear (click)="showConfirmDeleteCategoria(categoria.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </div>
     </ion-item>
   </ion-list>
+
+  <button ion-button block outline (click)="newCategoria()">Nova categoria</button>
 </ion-content>

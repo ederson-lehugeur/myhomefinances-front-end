@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
-
-/**
- * Generated class for the CategoriasPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -22,13 +15,52 @@ export class CategoriasPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public categoriaService: CategoriaService
-  ) {}
+    public categoriaService: CategoriaService,
+    public alertCtrl: AlertController
+  ) { }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    this.loadCategorias();
+  }
+
+  newCategoria() {
+    this.navCtrl.push('NewCategoriaPage');
+  }
+
+  deleteCategoria(categoriaId: string) {
+    this.categoriaService.delete(categoriaId)
+      .subscribe(() => this.loadCategorias(),
+        error => console.log(error));
+  }
+
+  editCategoria(categoria: CategoriaDTO) {
+    this.navCtrl.push('EditCategoriaPage', categoria);
+  }
+
+  loadCategorias() {
     this.categoriaService.findAll()
       .subscribe(response => this.categorias = response,
-      error => {});
+        error => console.log(error));
+  }
+
+  showConfirmDeleteCategoria(categoriaId: string) {
+    const confirm = this.alertCtrl.create({
+      title: 'Atenção',
+      message: 'Tem certeza que deseja excluir a categoria?',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.deleteCategoria(categoriaId);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

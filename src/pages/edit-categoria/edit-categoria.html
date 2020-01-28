@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>editCategoria</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="updateCategoria(); $event.preventDefault()">
+    <ion-input formControlName="id" type="text" hidden></ion-input>
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido
+    </p>
+    <ion-item>
+      <ion-label stacked>Complemento</ion-label>
+      <ion-input formControlName="complemento" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.complemento.dirty && formGroup.controls.complemento.errors" margin-left>
+      Valor inválido</p>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Salvar</button>
+  </form>
+</ion-content>
