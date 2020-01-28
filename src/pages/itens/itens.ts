@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ItemDTO } from '../../models/item.dto';
 import { ItemService } from '../../services/domain/item.service';
 
@@ -16,7 +16,8 @@ export class ItensPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public itemService: ItemService
+    public itemService: ItemService,
+    public alertCtrl: AlertController
   ) { }
 
   ionViewWillEnter() {
@@ -62,6 +63,43 @@ export class ItensPage {
 
   getKeysFromItemsGroupByCategoria(): Array<string> {
     return Array.from(this.itensPorCategoria.keys());
+  }
+
+  showUpdateOk() {
+    const alert = this.alertCtrl.create({
+      title: 'Sucesso',
+      message: 'Item atualizado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showConfirmDeleteItem(itemId: string) {
+    const confirm = this.alertCtrl.create({
+      title: 'Atenção',
+      message: 'Tem certeza que deseja excluir o item?',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.deleteItem(itemId);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
