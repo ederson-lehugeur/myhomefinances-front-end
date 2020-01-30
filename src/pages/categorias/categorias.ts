@@ -80,4 +80,11 @@ export class CategoriasPage {
     return loader;
   }
 
+  doRefresh(refresher) {
+    this.loadCategorias();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
+  }
+
 }

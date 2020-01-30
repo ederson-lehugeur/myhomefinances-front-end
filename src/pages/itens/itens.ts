@@ -117,4 +117,11 @@ export class ItensPage {
     return loader;
   }
 
+  doRefresh(refresher) {
+    this.loadItems();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
+  }
+
 }
