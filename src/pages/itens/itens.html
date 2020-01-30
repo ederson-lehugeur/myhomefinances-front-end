@@ -12,8 +12,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-fab top right edge>
+    <button (click)="newItem()" ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-list>
-    <ion-item *ngFor="let item of itens">
+    <!--ion-item *ngFor="let item of itens">
       <h2 id="itemNome">{{ item.nome }}</h2>
       <small id="itemCategoriaNome">
         <ion-note color="primary">{{ item.categoria.nome }}</ion-note>
@@ -29,37 +35,26 @@
           <ion-icon name="create"></ion-icon>
         </button>
       </div>
-      <!--button ion-button color="danger" style="float: right;">Excluir</!--button>
-      <button ion-button color="secondary" style="float: right;">Editar</button-->
+    </ion-item-->
+
+    <ion-item *ngFor="let item of itens">
+      <small>
+        <ion-note color="primary">{{ item.categoria.nome }}</ion-note>
+      </small>
+      <h2>{{ item.nome }}</h2>
+      <p *ngIf="item.complemento">{{ item.complemento }}</p>
+      <p *ngIf="!item.complemento">Sem complemento</p>
+
+      <div class="item-note" item-end>
+        <button ion-button clear (click)="editItem(item)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button clear (click)="showConfirmDeleteItem(item.id)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </div>
     </ion-item>
   </ion-list>
-
-  <!--ion-list>
-    <div *ngFor="let categoria of getKeysFromItemsGroupByCategoria()">
-      <ion-item-divider color="tint">
-        <ion-label>
-          {{ categoria }}
-        </ion-label>
-      </ion-item-divider>
-
-      <ion-item *ngFor="let item of getValuesFromItemsGroupByCategoria(categoria)">
-        <h2>{{ item.nome }}</h2>
-        <p *ngIf="item.complemento">{{ item.complemento }}</p>
-        <p *ngIf="!item.complemento">Sem complemento</p>
-
-        <div class="item-note" item-end>
-          <button ion-button clear (click)="editItem(item)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-          <button ion-button clear (click)="showConfirmDeleteItem(item.id)">
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </div>
-      </ion-item>
-    </div>
-  </ion-list-->
-
-  <button ion-button block outline (click)="newItem()">Novo item</button>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

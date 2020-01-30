@@ -11,9 +11,10 @@ import { ItemService } from '../../services/domain/item.service';
 export class ItensPage {
 
   itens: ItemDTO[] = [];
-  itensPorCategoria = new Map();
   page: number = 0;
-  itemsPerPage: number = 12;
+  itemsPerPage: number = 24;
+  orderBy: string = "dataHora";
+  direction: string = "DESC";
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +25,7 @@ export class ItensPage {
   ) { }
 
   ionViewWillEnter() {
+    this.clearItems();
     this.loadItems();
   }
 
@@ -33,27 +35,22 @@ export class ItensPage {
 
   deleteItem(itemId: string) {
     this.itemService.delete(itemId)
-      .subscribe(() => this.loadItems());
+      .subscribe(() => this.ionViewWillEnter());
   }
 
   editItem(item: ItemDTO) {
     this.navCtrl.push('EditItemPage', item);
   }
 
-  /*clearItemsPerCategory() {
-    this.itensPorCategoria.clear();
-  }*/
+  clearItems() {
+    this.itens = [];
+  }
 
   loadItems() {
     const loader = this.presentLoading();
-    this.itemService.findAll(this.page, this.itemsPerPage)
+    this.itemService.findAll(this.page, this.itemsPerPage, this.orderBy, this.direction)
       .subscribe(response => {
         this.itens = this.itens.concat(response['content']);
-        console.log(this.page);
-        console.log(this.itemsPerPage);
-        console.log(this.itens);
-        //this.clearItemsPerCategory();
-        //this.itemsGroupByCategory();
         loader.dismiss();
       },
         error => {
@@ -61,24 +58,6 @@ export class ItensPage {
           loader.dismiss();
         });
   }
-
-  /*itemsGroupByCategory() {
-    this.itens.map(item => {
-      if (this.itensPorCategoria.has(item.categoria.nome)) {
-        this.itensPorCategoria.get(item.categoria.nome).push(item);
-      } else {
-        this.itensPorCategoria.set(item.categoria.nome, [item]);
-      }
-    })
-  }*/
-
-  /*getValuesFromItemsGroupByCategoria(key: string): Array<ItemDTO> {
-    return this.itensPorCategoria.get(key);
-  }*/
-
-  /*getKeysFromItemsGroupByCategoria(): Array<string> {
-    return Array.from(this.itensPorCategoria.keys());
-  }*/
 
   showUpdateOk() {
     const alert = this.alertCtrl.create({

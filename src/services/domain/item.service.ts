@@ -8,8 +8,8 @@ export class ItemService {
 
     constructor(public http: HttpClient) { }
 
-    findAll(page: number = 0, itemsPerPage: number = 12) {
-        return this.http.get(`${API_CONFIG.baseUrl}/itens?page=${page}&linesPerPage=${itemsPerPage}`);
+    findAll(page: number = 0, itemsPerPage: number = 12, orderBy: string = 'dataHora', direction: string = 'DESC') {
+        return this.http.get(`${API_CONFIG.baseUrl}/itens?page=${page}&linesPerPage=${itemsPerPage}&orderBy=${orderBy}&direction=${direction}`);
     }
 
     insert(item: ItemDTO) {
