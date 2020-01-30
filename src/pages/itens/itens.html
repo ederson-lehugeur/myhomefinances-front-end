@@ -12,7 +12,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!--ion-list>
+  <ion-list>
     <ion-item *ngFor="let item of itens">
       <h2 id="itemNome">{{ item.nome }}</h2>
       <small id="itemCategoriaNome">
@@ -28,13 +28,13 @@
         <button id="buttonCreate" ion-button clear (click)="editItem(item)">
           <ion-icon name="create"></ion-icon>
         </button>
-      </div-->
-  <!--button ion-button color="danger" style="float: right;">Excluir</button>
+      </div>
+      <!--button ion-button color="danger" style="float: right;">Excluir</!--button>
       <button ion-button color="secondary" style="float: right;">Editar</button-->
-  <!--/ion-item>
-  </ion-list-->
+    </ion-item>
+  </ion-list>
 
-  <ion-list>
+  <!--ion-list>
     <div *ngFor="let categoria of getKeysFromItemsGroupByCategoria()">
       <ion-item-divider color="tint">
         <ion-label>
@@ -57,7 +57,11 @@
         </div>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-list-->
 
   <button ion-button block outline (click)="newItem()">Novo item</button>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
