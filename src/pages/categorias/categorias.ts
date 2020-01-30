@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
 
@@ -16,7 +16,8 @@ export class CategoriasPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public categoriaService: CategoriaService,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
   ) { }
 
   ionViewWillEnter() {
@@ -38,9 +39,16 @@ export class CategoriasPage {
   }
 
   loadCategorias() {
+    const loader = this.presentLoading();
     this.categoriaService.findAll()
-      .subscribe(response => this.categorias = response,
-        error => console.log(error));
+      .subscribe(response => {
+        this.categorias = response;
+        loader.dismiss();
+      },
+        error => {
+          console.log(error);
+          loader.dismiss();
+        });
   }
 
   showConfirmDeleteCategoria(categoriaId: string) {
@@ -61,6 +69,15 @@ export class CategoriasPage {
       ]
     });
     confirm.present();
+  }
+
+  presentLoading(): Loading {
+    const loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+
+    return loader;
   }
 
 }

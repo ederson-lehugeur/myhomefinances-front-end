@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { ItemDTO } from '../../models/item.dto';
 import { ItemService } from '../../services/domain/item.service';
 
@@ -17,7 +17,8 @@ export class ItensPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public itemService: ItemService,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
   ) { }
 
   ionViewWillEnter() {
@@ -38,13 +39,18 @@ export class ItensPage {
   }
 
   loadItems() {
+    const loader = this.presentLoading();
     this.itemService.findAll()
       .subscribe(response => {
         this.itens = response;
         this.itensPorCategoria.clear();
         this.itemsGroupByCategoria();
+        loader.dismiss();
       },
-        error => console.log(error));
+        error => {
+          console.log(error);
+          loader.dismiss();
+        });
   }
 
   itemsGroupByCategoria() {
@@ -100,6 +106,15 @@ export class ItensPage {
       ]
     });
     confirm.present();
+  }
+
+  presentLoading(): Loading {
+    const loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+
+    return loader;
   }
 
 }
