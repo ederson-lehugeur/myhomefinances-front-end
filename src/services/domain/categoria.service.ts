@@ -13,6 +13,15 @@ export class CategoriaService {
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
     }
 
+    findAllPageable(
+        page: number = 0,
+        itemsPerPage: number = 12,
+        orderBy: string = 'dataHora',
+        direction: string = 'DESC') {
+
+        return this.http.get(`${API_CONFIG.baseUrl}/categorias/pageable?page=${page}&linesPerPage=${itemsPerPage}&orderBy=${orderBy}&direction=${direction}`);
+    }
+
     insert(categoria: CategoriaDTO) {
         return this.http.post(
             `${API_CONFIG.baseUrl}/categorias`,

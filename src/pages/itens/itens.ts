@@ -25,6 +25,7 @@ export class ItensPage {
   ) { }
 
   ionViewWillEnter() {
+    this.resetPage();
     this.clearItems();
     this.loadItems();
   }
@@ -35,7 +36,8 @@ export class ItensPage {
 
   deleteItem(itemId: string) {
     this.itemService.delete(itemId)
-      .subscribe(() => this.ionViewWillEnter());
+      .subscribe(() => this.ionViewWillEnter(),
+        error => console.log(error));
   }
 
   editItem(item: ItemDTO) {
@@ -44,6 +46,10 @@ export class ItensPage {
 
   clearItems() {
     this.itens = [];
+  }
+
+  resetPage() {
+    this.page = 0;
   }
 
   loadItems() {
@@ -106,8 +112,8 @@ export class ItensPage {
   }
 
   doRefresh(refresher) {
-    this.page = 0;
-    this.itens = [];
+    this.resetPage();
+    this.clearItems();
     this.loadItems();
     setTimeout(() => {
       refresher.complete();
@@ -115,7 +121,7 @@ export class ItensPage {
   }
 
   doInfinite(infiniteScroll) {
-    this.page++;
+    this.resetPage();
     this.loadItems();
     setTimeout(() => {
       infiniteScroll.complete();

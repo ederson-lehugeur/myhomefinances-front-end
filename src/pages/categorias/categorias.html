@@ -12,6 +12,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-fab top right edge>
+    <button (click)="newCategoria()" ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-list>
     <ion-item *ngFor="let categoria of categorias">
       <h2>{{ categoria.nome }}</h2>
@@ -28,5 +34,7 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button block outline (click)="newCategoria()">Nova categoria</button>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

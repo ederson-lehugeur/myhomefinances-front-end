@@ -11,6 +11,10 @@ import { CategoriaDTO } from '../../models/categoria.dto';
 export class CategoriasPage {
 
   categorias: CategoriaDTO[];
+  page: number = 0;
+  itemsPerPage: number = 24;
+  orderBy: string = "nome";
+  direction: string = "ASC";
 
   constructor(
     public navCtrl: NavController,
@@ -21,6 +25,8 @@ export class CategoriasPage {
   ) { }
 
   ionViewWillEnter() {
+    this.resetPage();
+    this.clearCategorias();
     this.loadCategorias();
   }
 
@@ -30,7 +36,7 @@ export class CategoriasPage {
 
   deleteCategoria(categoriaId: string) {
     this.categoriaService.delete(categoriaId)
-      .subscribe(() => this.loadCategorias(),
+      .subscribe(() => this.ionViewWillEnter(),
         error => console.log(error));
   }
 
@@ -38,11 +44,19 @@ export class CategoriasPage {
     this.navCtrl.push('EditCategoriaPage', categoria);
   }
 
+  clearCategorias() {
+    this.categorias = [];
+  }
+
+  resetPage() {
+    this.page = 0;
+  }
+
   loadCategorias() {
     const loader = this.presentLoading();
-    this.categoriaService.findAll()
+    this.categoriaService.findAllPageable(this.page, this.itemsPerPage, this.orderBy, this.direction)
       .subscribe(response => {
-        this.categorias = response;
+        this.categorias = this.categorias.concat(response['content']);
         loader.dismiss();
       },
         error => {
@@ -81,9 +95,19 @@ export class CategoriasPage {
   }
 
   doRefresh(refresher) {
+    this.resetPage();
+    this.clearCategorias();
     this.loadCategorias();
     setTimeout(() => {
       refresher.complete();
+    }, 500);
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.loadCategorias();
+    setTimeout(() => {
+      infiniteScroll.complete();
     }, 500);
   }
 
