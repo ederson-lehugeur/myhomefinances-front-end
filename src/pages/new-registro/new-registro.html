@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novo registro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="createRegistro(); $event.preventDefault()">
+    <ion-item>
+      <ion-label>Item*</ion-label>
+      <ion-select formControlName="itemId" submitText="Ok" cancelText="Cancelar">
+        <ion-option *ngFor="let item of itens" [value]="item.id">{{ item.nome }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.itemId.dirty && formGroup.controls.itemId.errors" margin-left>Valor
+      inválido
+    </p>
+    <ion-item>
+      <ion-label>Valor*</ion-label>
+      <ion-input formControlName="valor" type="number"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.valor.dirty && formGroup.controls.valor.errors" margin-left>Valor
+      inválido
+    </p>
+    <ion-item>
+      <ion-label>Tipo de registro*</ion-label>
+      <ion-select formControlName="tipoRegistroId" submitText="oK" cancelText="Cancelar">
+        <ion-option *ngFor="let tipoRegistro of tiposDeRegistros" [value]="tipoRegistro.id">{{ tipoRegistro.nome }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.tipoRegistroId.dirty && formGroup.controls.tipoRegistroId.errors"
+      margin-left>Valor
+      inválido
+    </p>
+    <ion-item>
+      <ion-label>Data*</ion-label>
+      <ion-datetime displayFormat="D MMM YYYY HH:mm" pickerFormat="D MMM YY HH:mm" formControlName="dataHora">
+      </ion-datetime>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.dataHora.dirty && formGroup.controls.dataHora.errors" margin-left>Data
+      inválida
+    </p>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Salvar</button>
+  </form>
+
+  <!--form [formGroup]="formGroup" (ngSubmit)="createItem(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido
+    </p>
+    <ion-item>
+      <ion-label stacked>Complemento</ion-label>
+      <ion-input formControlName="complemento" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.complemento.dirty && formGroup.controls.complemento.errors" margin-left>
+      Valor inválido</p>
+    <ion-item>
+      <ion-label stacked>Categorias*</ion-label>
+      <ion-select formControlName="categoriaId">
+        <ion-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.categoriaId.dirty && formGroup.controls.categoriaId.errors" margin-left>
+      Valor inválido</p>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Salvar</button>
+  </form-->
+</ion-content>

@@ -1,7 +1,8 @@
+import { DateService } from '../services/date.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -14,6 +15,13 @@ import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ItemService } from '../services/domain/item.service';
+import { SaldoService } from '../services/domain/saldo.service';
+import { RegistroService } from '../services/domain/registro.service';
+import { TipoRegistroService } from '../services/domain/tipo-registro.service';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -31,14 +39,19 @@ import { ItemService } from '../services/domain/item.service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     CategoriaService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
     UsuarioService,
-    ItemService
+    ItemService,
+    SaldoService,
+    RegistroService,
+    TipoRegistroService,
+    DateService
   ]
 })
-export class AppModule {}
+export class AppModule { }

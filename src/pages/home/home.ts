@@ -36,7 +36,7 @@ export class HomePage {
       this.auth.refreshToken()
         .subscribe(response => {
           this.auth.successfulLogin(response.headers.get('Authorization'))
-          this.navCtrl.setRoot('ItensPage');
+          this.navCtrl.setRoot('RegistroPage');
         },
           error => { });
     }
@@ -46,7 +46,7 @@ export class HomePage {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'))
-        this.navCtrl.setRoot('ItensPage');
+        this.navCtrl.setRoot('RegistroPage');
       },
         error => { });
   }

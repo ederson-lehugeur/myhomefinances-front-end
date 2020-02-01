@@ -2,13 +2,18 @@ import { API_CONFIG } from './../../config/api.config';
 import { ItemDTO } from '../../models/item.dto';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ItemService {
 
     constructor(public http: HttpClient) { }
 
-    findAll(page: number = 0, itemsPerPage: number = 12, orderBy: string = 'dataHora', direction: string = 'DESC') {
+    findAll(): Observable<ItemDTO[]> {
+        return this.http.get<ItemDTO[]>(`${API_CONFIG.baseUrl}/itens`);
+    }
+
+    findAllPageable(page: number = 0, itemsPerPage: number = 12, orderBy: string = 'dataHora', direction: string = 'DESC') {
         return this.http.get(`${API_CONFIG.baseUrl}/itens/pageable?page=${page}&linesPerPage=${itemsPerPage}&orderBy=${orderBy}&direction=${direction}`);
     }
 

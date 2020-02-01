@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Registros</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-fab top right edge>
+    <button (click)="newRegistro()" ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-card>
+    <ion-card-header>
+      Saldo na carteira
+    </ion-card-header>
+    <ion-card-content color="primary">
+      {{ saldo?.saldo | currency }}
+    </ion-card-content>
+  </ion-card>
+
+  <p *ngIf="registros.length == 0" text-center>Você ainda não possui registros!</p>
+
+  <!--ion-list>
+    <ion-item *ngFor="let registro of registros">
+      <h2>{{ registro.item.nome }}</h2>
+      <ion-note *ngIf="isContainedInValoresDeEntrada(registro.tipoRegistro.nome)" color="positive">
+        <small>
+          <ion-icon name="add"></ion-icon>
+        </small> {{ registro.valor | currency }}
+      </ion-note>
+      <ion-note *ngIf="isContainedInValoresDeSaida(registro.tipoRegistro.nome)" color="danger">
+        <small>
+          <ion-icon name="remove"></ion-icon>
+        </small> {{ registro.valor | currency }}
+      </ion-note>
+
+      <ion-note item-end>
+        <p>{{ registro.tipoRegistro.nome }} / {{ registro.dataHora | date }}</p>
+      </ion-note>
+    </ion-item>
+  </ion-list-->
+
+  <!--ion-list>
+    <ion-item *ngFor="let registro of registros">
+      <h2>{{ registro.item.nome }}</h2>
+      <ion-note>
+        <p>{{ registro.tipoRegistro.nome }} / {{ registro.dataHora | date }}</p>
+      </ion-note>
+
+      <ion-note *ngIf="isContainedInValoresDeEntrada(registro.tipoRegistro.nome)" color="positive" item-end>
+        <small>
+          <ion-icon name="add"></ion-icon>
+        </small> {{ registro.valor | currency }}
+      </ion-note>
+      <ion-note *ngIf="isContainedInValoresDeSaida(registro.tipoRegistro.nome)" color="danger" item-end>
+        <small>
+          <ion-icon name="remove"></ion-icon>
+        </small> {{ registro.valor * -1 | currency }}
+      </ion-note>
+    </ion-item>
+  </ion-list-->
+
+  <ion-list>
+    <ion-item *ngFor="let registro of registros">
+      <h2>{{ registro.item.nome }}</h2>
+      <ion-note>
+        <p>{{ registro.tipoRegistro.nome }} / {{ registro.dataHora | date: 'MMM d, yyyy' }}</p>
+      </ion-note>
+
+      <ion-note *ngIf="!registro.tipoRegistro.registroDeSaida" color="positive" item-end>
+        <small>
+          <ion-icon name="add"></ion-icon>
+        </small> {{ registro.valor | currency }}
+      </ion-note>
+      <ion-note *ngIf="registro.tipoRegistro.registroDeSaida" color="danger" item-end>
+        <small>
+          <ion-icon name="remove"></ion-icon>
+        </small> {{ registro.valor | currency }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <!--ion-grid *ngIf="registros.length != 0">
+    <ion-row>
+      <ion-col col-4>Item</ion-col>
+      <ion-col col-3>Tipo de Registro</ion-col>
+      <ion-col col-3>Data</ion-col>
+      <ion-col col-2>Valor</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let registro of registros">
+      <ion-col col-4>{{ registro.item.nome }}</ion-col>
+      <ion-col col-3>{{ registro.tipoRegistro.nome }}</ion-col>
+      <ion-col col-3>{{ registro.dataHora | date }}</ion-col>
+      <ion-col col-2>{{ registro.valor | currency }}</ion-col>
+    </ion-row>
+  </ion-grid-->
+</ion-content>

@@ -54,7 +54,7 @@ export class ItensPage {
 
   loadItems() {
     const loader = this.presentLoading();
-    this.itemService.findAll(this.page, this.itemsPerPage, this.orderBy, this.direction)
+    this.itemService.findAllPageable(this.page, this.itemsPerPage, this.orderBy, this.direction)
       .subscribe(response => {
         this.itens = this.itens.concat(response['content']);
         loader.dismiss();
@@ -121,7 +121,7 @@ export class ItensPage {
   }
 
   doInfinite(infiniteScroll) {
-    this.resetPage();
+    this.page++;
     this.loadItems();
     setTimeout(() => {
       infiniteScroll.complete();
