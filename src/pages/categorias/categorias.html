@@ -20,8 +20,10 @@
 
   <ion-list>
     <ion-item *ngFor="let categoria of categorias">
-      <h2>{{ categoria.nome }}</h2>
-      <p>{{ categoria.complemento }}</p>
+      <div (click)="viewCategoria(categoria)">
+        <h2>{{ categoria.nome }}</h2>
+        <p>{{ categoria.complemento }}</p>
+      </div>
 
       <div class="item-note" item-end>
         <button ion-button clear (click)="editCategoria(categoria)">

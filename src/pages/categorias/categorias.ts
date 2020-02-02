@@ -44,6 +44,10 @@ export class CategoriasPage {
     this.navCtrl.push('EditCategoriaPage', categoria);
   }
 
+  viewCategoria(categoria: CategoriaDTO) {
+    this.navCtrl.push('ViewCategoriaPage', { categoria: categoria });
+  }
+
   clearCategorias() {
     this.categorias = [];
   }
