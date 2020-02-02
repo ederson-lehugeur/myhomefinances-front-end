@@ -7,10 +7,10 @@ import { RegistroDTO } from '../../models/registro.dto';
 
 @IonicPage()
 @Component({
-  selector: 'page-registro',
-  templateUrl: 'registro.html',
+  selector: 'page-registros',
+  templateUrl: 'registros.html',
 })
-export class RegistroPage {
+export class RegistrosPage {
 
   saldo: SaldoDTO;
   registros: RegistroDTO[] = [];
@@ -71,6 +71,10 @@ export class RegistroPage {
           console.log(error);
           loader.dismiss();
         });
+  }
+
+  viewItem(registro: RegistroDTO) {
+    this.navCtrl.push('ViewRegistroPage', { registro: registro });
   }
 
   presentLoading(): Loading {

@@ -46,12 +46,12 @@ registerLocaleData(localePt);
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
+    DateService,
     UsuarioService,
     ItemService,
     SaldoService,
     RegistroService,
-    TipoRegistroService,
-    DateService
+    TipoRegistroService
   ]
 })
 export class AppModule { }

@@ -28,4 +28,14 @@ export class RegistroService {
         );
     }
 
+    delete(registroId: string) {
+        return this.http.delete(
+            `${API_CONFIG.baseUrl}/registros/${registroId}`,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
+
 }
