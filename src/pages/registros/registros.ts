@@ -73,7 +73,7 @@ export class RegistrosPage {
         });
   }
 
-  viewItem(registro: RegistroDTO) {
+  viewRegistro(registro: RegistroDTO) {
     this.navCtrl.push('ViewRegistroPage', { registro: registro });
   }
 

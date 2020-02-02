@@ -65,6 +65,10 @@ export class ItensPage {
         });
   }
 
+  viewItem(item: ItemDTO) {
+    this.navCtrl.push('ViewItemPage', { item: item });
+  }
+
   showUpdateOk() {
     const alert = this.alertCtrl.create({
       title: 'Sucesso',

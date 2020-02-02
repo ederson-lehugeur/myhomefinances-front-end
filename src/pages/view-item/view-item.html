@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalhes do item</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <h2>Nome</h2>
+      <p>{{ item.nome }}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Complemento</h2>
+      <p *ngIf="!item.complemento">Sem complemento</p>
+      <p *ngIf="item.complemento">{{ item.complemento }}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Categoria</h2>
+      <p>{{ item.categoria.nome }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
