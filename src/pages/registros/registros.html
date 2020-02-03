@@ -76,12 +76,12 @@
         <p>{{ registro.tipoRegistro.nome }} / {{ registro.dataHora | date: 'MMM d, yyyy' }}</p>
       </ion-note>
 
-      <ion-note *ngIf="!registro.tipoRegistro.registroDeSaida" color="positive" item-end>
+      <ion-note *ngIf="!registro.tipoRegistro.ehRegistroDeSaida" color="positive" item-end>
         <small>
           <ion-icon name="add"></ion-icon>
         </small> {{ registro.valor | currency }}
       </ion-note>
-      <ion-note *ngIf="registro.tipoRegistro.registroDeSaida" color="danger" item-end>
+      <ion-note *ngIf="registro.tipoRegistro.ehRegistroDeSaida" color="danger" item-end>
         <small>
           <ion-icon name="remove"></ion-icon>
         </small> {{ registro.valor | currency }}

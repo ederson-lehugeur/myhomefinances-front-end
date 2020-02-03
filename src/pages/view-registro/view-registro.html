@@ -14,6 +14,11 @@
       <p>{{ registro.item.nome }}</p>
     </ion-item>
     <ion-item>
+      <h2>Complemento do item</h2>
+      <p *ngIf="registro.item.complemento">{{ registro.item.complemento }}</p>
+      <p *ngIf="!registro.item.complemento">Sem complemento</p>
+    </ion-item>
+    <ion-item>
       <h2>Valor</h2>
       <p>{{ registro.valor | currency }}</p>
     </ion-item>
