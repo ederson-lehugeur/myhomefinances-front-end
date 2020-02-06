@@ -1,0 +1,9 @@
+- Gerar build de produção
+	ionic cordova build android --release --prod
+- Gerar chave de assinatura do app
+	keytool -genkey -v -keystore my-home-finances-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-home-finances
+	PASSWORD: e5cc7f235861
+- Assinar
+	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-home-finances-key.jks android-release-unsigned.apk my-home-finances
+- Otimizar arquivo
+	zipalign -v 4 android-release-unsigned.apk MyHomeFinances.apk
