@@ -40,7 +40,7 @@
     <ion-item *ngFor="let item of itens">
       <div (click)="viewItem(item)">
         <small>
-          <ion-note color="primary">{{ item.categoria.nome }}</ion-note>
+          <ion-note color="primary">{{ item.nomeCategoria }}</ion-note>
         </small>
         <h2>{{ item.nome }}</h2>
         <p *ngIf="item.complemento">{{ item.complemento }}</p>

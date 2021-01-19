@@ -10,7 +10,7 @@ export class TipoRegistroService {
     constructor(public http: HttpClient) { }
 
     findAll(): Observable<TipoRegistroDTO[]> {
-        return this.http.get<TipoRegistroDTO[]>(`${API_CONFIG.baseUrl}/tiposRegistros`);
+        return this.http.get<TipoRegistroDTO[]>(`${API_CONFIG.baseUrl}/tipos-registros`);
     }
 
 }

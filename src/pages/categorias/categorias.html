@@ -12,11 +12,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-fab top right edge>
+  <!--ion-fab top right edge>
     <button (click)="newCategoria()" ion-fab mini>
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab-->
 
   <ion-list>
     <ion-item *ngFor="let categoria of categorias">
@@ -25,14 +25,14 @@
         <p>{{ categoria.complemento }}</p>
       </div>
 
-      <div class="item-note" item-end>
+      <!--div class="item-note" item-end *ngIf="expression">
         <button ion-button clear (click)="editCategoria(categoria)">
           <ion-icon name="create"></ion-icon>
         </button>
         <button ion-button clear (click)="showConfirmDeleteCategoria(categoria.id)">
           <ion-icon name="trash"></ion-icon>
         </button>
-      </div>
+      </div-->
     </ion-item>
   </ion-list>
 

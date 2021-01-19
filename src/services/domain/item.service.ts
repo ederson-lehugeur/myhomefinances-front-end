@@ -13,8 +13,8 @@ export class ItemService {
         return this.http.get<ItemDTO[]>(`${API_CONFIG.baseUrl}/itens`);
     }
 
-    findAllPageable(page: number = 0, itemsPerPage: number = 12, orderBy: string = 'dataHora', direction: string = 'DESC') {
-        return this.http.get(`${API_CONFIG.baseUrl}/itens/pageable?page=${page}&linesPerPage=${itemsPerPage}&orderBy=${orderBy}&direction=${direction}`);
+    findAllPageable(page: number = 0, size: number = 12, sort: string = 'nome', direction: string = 'ASC') {
+        return this.http.get(`${API_CONFIG.baseUrl}/itens?page=${page}&size=${size}&sort=${sort}&direction=${direction}`);
     }
 
     insert(item: ItemDTO) {

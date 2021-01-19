@@ -35,7 +35,8 @@ export class NewRegistroPage {
 
     this.formGroup = this.formBuilder.group({
       valor: ['', [Validators.required, Validators.pattern('^[0-9]{1,8}(\.[0-9]{1,2})?$')]],
-      dataHora: [now.toISOString(), Validators.required],
+      //dataHora: [now.toISOString(), Validators.required],
+      dataHora: [now, Validators.required],
       tipoRegistroId: ['1', Validators.required],
       itemId: ['', Validators.required]
     });
@@ -52,10 +53,10 @@ export class NewRegistroPage {
   }
 
   loadItems() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.itemService.findAll()
         .subscribe(response => {
-          this.itens = response;
+          this.itens = response['content'];
           resolve();
         },
           error => {
@@ -65,7 +66,7 @@ export class NewRegistroPage {
   }
 
   loadTiposDeRegistros() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.tipoRegistroService.findAll()
         .subscribe(response => {
           this.tiposDeRegistros = response;

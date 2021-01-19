@@ -15,8 +15,8 @@ export class RegistrosPage {
   saldo: SaldoDTO;
   registros: RegistroDTO[] = [];
   page: number = 0;
-  itemsPerPage: number = 24;
-  orderBy: string = "dataHora";
+  size: number = 24;
+  sort: string = "dataHora";
   direction: string = "DESC";
 
   constructor(
@@ -62,7 +62,7 @@ export class RegistrosPage {
 
   loadRegistros() {
     const loader = this.presentLoading();
-    this.registroService.findAllPageable(this.page, this.itemsPerPage, this.orderBy, this.direction)
+    this.registroService.findAllPageable(this.page, this.size, this.sort, this.direction)
       .subscribe(response => {
         this.registros = this.registros.concat(response['content']);
         loader.dismiss();

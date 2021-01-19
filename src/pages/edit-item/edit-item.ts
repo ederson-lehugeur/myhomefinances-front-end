@@ -34,7 +34,7 @@ export class EditItemPage {
   ionViewDidLoad() {
     this.categoriaService.findAll()
       .subscribe(response => {
-        this.categorias = response
+        this.categorias = response['content'];
 
         this.loadFormGroup();
       },
@@ -46,7 +46,7 @@ export class EditItemPage {
       id: this.navParams.get('id'),
       nome: this.navParams.get('nome'),
       complemento: this.navParams.get('complemento'),
-      categoriaId: this.navParams.get('categoria').id
+      categoriaId: this.navParams.get('categoriaId')
     });
   }
 

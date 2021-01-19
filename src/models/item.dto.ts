@@ -2,5 +2,6 @@ export interface ItemDTO {
     id: string;
     nome: string;
     complemento: string;
-    categoria: any;
+    categoriaId: number;
+    nomeCategoria: string;
 }

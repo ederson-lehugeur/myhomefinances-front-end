@@ -11,7 +11,7 @@ export class AuthService {
 
     jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor(public http: HttpClient, public storage: StorageService) {}
+    constructor(public http: HttpClient, public storage: StorageService) { }
 
     authenticate(creds: CredenciaisDTO) {
         return this.http.post(
@@ -34,6 +34,7 @@ export class AuthService {
     }
 
     successfulLogin(authorizationValue: string) {
+        console.log(authorizationValue);
         const token = authorizationValue.substring(7);
         const user: LocalUser = {
             token: token,

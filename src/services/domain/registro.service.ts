@@ -10,11 +10,11 @@ export class RegistroService {
 
     findAllPageable(
         page: number = 0,
-        itemsPerPage: number = 12,
-        orderBy: string = 'dataHora',
+        size: number = 12,
+        sort: string = 'dataHora',
         direction: string = 'DESC') {
 
-        return this.http.get(`${API_CONFIG.baseUrl}/registros/pageable?page=${page}&linesPerPage=${itemsPerPage}&orderBy=${orderBy}&direction=${direction}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/registros?page=${page}&size=${size}&sort=${sort}&direction=${direction}`);
     }
 
     insert(registro: RegistroDTO) {

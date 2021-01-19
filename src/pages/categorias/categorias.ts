@@ -12,8 +12,8 @@ export class CategoriasPage {
 
   categorias: CategoriaDTO[];
   page: number = 0;
-  itemsPerPage: number = 24;
-  orderBy: string = "nome";
+  size: number = 24;
+  sort: string = "nome";
   direction: string = "ASC";
 
   constructor(
@@ -30,19 +30,19 @@ export class CategoriasPage {
     this.loadCategorias();
   }
 
-  newCategoria() {
+  /*newCategoria() {
     this.navCtrl.push('NewCategoriaPage');
-  }
+  }*/
 
-  deleteCategoria(categoriaId: string) {
+  /*deleteCategoria(categoriaId: string) {
     this.categoriaService.delete(categoriaId)
       .subscribe(() => this.ionViewWillEnter(),
         error => console.log(error));
-  }
+  }*/
 
-  editCategoria(categoria: CategoriaDTO) {
+  /*editCategoria(categoria: CategoriaDTO) {
     this.navCtrl.push('EditCategoriaPage', categoria);
-  }
+  }*/
 
   viewCategoria(categoria: CategoriaDTO) {
     this.navCtrl.push('ViewCategoriaPage', { categoria: categoria });
@@ -58,7 +58,7 @@ export class CategoriasPage {
 
   loadCategorias() {
     const loader = this.presentLoading();
-    this.categoriaService.findAllPageable(this.page, this.itemsPerPage, this.orderBy, this.direction)
+    this.categoriaService.findAllPageable(this.page, this.size, this.sort, this.direction)
       .subscribe(response => {
         this.categorias = this.categorias.concat(response['content']);
         loader.dismiss();

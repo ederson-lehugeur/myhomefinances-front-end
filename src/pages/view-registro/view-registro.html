@@ -11,12 +11,12 @@
   <ion-list>
     <ion-item>
       <h2>Item</h2>
-      <p>{{ registro.item.nome }}</p>
+      <p>{{ registro.nomeItem }}</p>
     </ion-item>
     <ion-item>
       <h2>Complemento do item</h2>
-      <p *ngIf="registro.item.complemento">{{ registro.item.complemento }}</p>
-      <p *ngIf="!registro.item.complemento">Sem complemento</p>
+      <p *ngIf="registro.complementoItem">{{ registro.complementoItem }}</p>
+      <p *ngIf="!registro.complementoItem">Sem complemento</p>
     </ion-item>
     <ion-item>
       <h2>Valor</h2>
@@ -24,11 +24,11 @@
     </ion-item>
     <ion-item>
       <h2>Tipo de registro</h2>
-      <p>{{ registro.tipoRegistro.nome }}</p>
+      <p>{{ registro.nomeTipoRegistro }}</p>
     </ion-item>
     <ion-item>
       <h2>Data</h2>
-      <p>{{ registro.dataHora | date: 'd MMM yyyy H:mm' | titlecase  }}</p>
+      <p>{{ registro.dataHora | date: 'd MMM yyyy H:mm' | titlecase }}</p>
     </ion-item>
   </ion-list>
 

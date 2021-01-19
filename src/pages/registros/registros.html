@@ -71,17 +71,17 @@
 
   <ion-list>
     <ion-item *ngFor="let registro of registros" (click)="viewRegistro(registro)">
-      <h2>{{ registro.item.nome }}</h2>
+      <h2>{{ registro.nomeItem }}</h2>
       <ion-note>
-        <p>{{ registro.tipoRegistro.nome }} / {{ registro.dataHora | date: 'MMM d, yyyy' }}</p>
+        <p>{{ registro.nomeTipoRegistro }} / {{ registro.dataHora | date: 'MMM d, yyyy' }}</p>
       </ion-note>
 
-      <ion-note *ngIf="!registro.tipoRegistro.ehRegistroDeSaida" color="positive" item-end>
+      <ion-note *ngIf="!registro.ehRegistroDeSaida" color="positive" item-end>
         <small>
           <ion-icon name="add"></ion-icon>
         </small> {{ registro.valor | currency }}
       </ion-note>
-      <ion-note *ngIf="registro.tipoRegistro.ehRegistroDeSaida" color="danger" item-end>
+      <ion-note *ngIf="registro.ehRegistroDeSaida" color="danger" item-end>
         <small>
           <ion-icon name="remove"></ion-icon>
         </small> {{ registro.valor | currency }}

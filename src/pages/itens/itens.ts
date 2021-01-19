@@ -12,9 +12,9 @@ export class ItensPage {
 
   itens: ItemDTO[] = [];
   page: number = 0;
-  itemsPerPage: number = 24;
-  orderBy: string = "dataHora";
-  direction: string = "DESC";
+  size: number = 24;
+  sort: string = "nome";
+  direction: string = "ASC";
 
   constructor(
     public navCtrl: NavController,
@@ -54,7 +54,7 @@ export class ItensPage {
 
   loadItems() {
     const loader = this.presentLoading();
-    this.itemService.findAllPageable(this.page, this.itemsPerPage, this.orderBy, this.direction)
+    this.itemService.findAllPageable(this.page, this.size, this.sort, this.direction)
       .subscribe(response => {
         this.itens = this.itens.concat(response['content']);
         loader.dismiss();

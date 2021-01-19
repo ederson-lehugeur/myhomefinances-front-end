@@ -5,6 +5,13 @@ export interface RegistroDTO {
     id: string;
     valor: number;
     dataHora: Date;
-    tipoRegistro: TipoRegistroDTO;
-    item: ItemDTO;
+    /*tipoRegistro: TipoRegistroDTO;
+    item: ItemDTO;*/
+    tipoRegistroId: number;
+    nomeTipoRegistro: string;
+    ehRegistroDeSaida: number;
+    itemId: number;
+    nomeItem: string;
+    complemento: string;
+    usuarioId: number;
 }
