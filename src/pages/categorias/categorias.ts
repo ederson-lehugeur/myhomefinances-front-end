@@ -69,7 +69,7 @@ export class CategoriasPage {
         });
   }
 
-  showConfirmDeleteCategoria(categoriaId: string) {
+  /*showConfirmDeleteCategoria(categoriaId: string) {
     const confirm = this.alertCtrl.create({
       title: 'Atenção',
       message: 'Tem certeza que deseja excluir a categoria?',
@@ -87,7 +87,7 @@ export class CategoriasPage {
       ]
     });
     confirm.present();
-  }
+  }*/
 
   presentLoading(): Loading {
     const loader = this.loadingCtrl.create({

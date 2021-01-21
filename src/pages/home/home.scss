@@ -1,6 +1,37 @@
 page-home {
+    @media (min-width: 426px) {
+        form {
+            max-width: 50%;
+            align-self: center;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    @media (min-width: 769px) {
+        form {
+            max-width: 40%;
+            align-self: center;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        form {
+            max-width: 26%;
+            align-self: center;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .item  {
+        padding-left: 0px;
+    }
+
     h3 {
-        text-align: center
+        text-align: center;
     }
 
     img {
