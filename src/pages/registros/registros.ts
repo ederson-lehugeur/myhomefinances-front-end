@@ -77,6 +77,10 @@ export class RegistrosPage {
     this.navCtrl.push('ViewRegistroPage', { registro: registro });
   }
 
+  /*viewRegistro(registroId: string) {
+    this.navCtrl.push('ViewRegistroPage', { registroId: registroId });
+  }*/
+
   presentLoading(): Loading {
     const loader = this.loadingCtrl.create({
       content: "Aguarde..."

@@ -34,7 +34,6 @@ export class AuthService {
     }
 
     successfulLogin(authorizationValue: string) {
-        console.log(authorizationValue);
         const token = authorizationValue.substring(7);
         const user: LocalUser = {
             token: token,
