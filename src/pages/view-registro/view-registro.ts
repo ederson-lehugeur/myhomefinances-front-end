@@ -2,7 +2,6 @@ import { RegistroDTO } from './../../models/registro.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { RegistroService } from '../../services/domain/registro.service';
-import { StringLiteral } from 'typescript';
 
 @IonicPage()
 @Component({
@@ -24,32 +23,18 @@ export class ViewRegistroPage {
     this.registro = this.navParams.get('registro');
   }
 
-  /*ionViewWillEnter() {
-    if (this.registroAtualizado) {
-      const loader = this.presentLoading();
-      this.registroService.findById(this.registro.id)
-        .subscribe(response => {
-          this.registro = response;
-          loader.dismiss();
-        }, error => {
+  loadRegistro() {
+    const loader = this.presentLoading();
+    this.registroService.findById(this.registro.id)
+      .subscribe(response => {
+        this.registro = response
+        loader.dismiss();
+      },
+        error => {
           console.log(error);
           loader.dismiss();
-        })
-    }
-  }*/
-
-  /*loadRegistro() {
-    const loader = this.presentLoading();
-    this.registroId = this.navParams.get('registroId');
-    this.registroService.findById(this.registroId)
-      .subscribe(response => {
-        this.registro = response;
-        loader.dismiss();
-      }, error => {
-        console.log(error);
-        loader.dismiss();
-      })
-  }*/
+        });
+  }
 
   deleteRegistro(registroId: string) {
     this.registroService.delete(registroId)
@@ -83,7 +68,7 @@ export class ViewRegistroPage {
   editRegistro(registro: RegistroDTO) {
     this.navCtrl.push('EditRegistroPage', {
       registro: registro,
-      //callback: this.myCallbackFunction
+      reloadRegistroAposAtualizacao: this.reloadRegistroAposAtualizacao
     });
   }
 
@@ -96,12 +81,8 @@ export class ViewRegistroPage {
     return loader;
   }
 
-  /*myCallbackFunction = function () {
-    return new Promise<void>((resolve, reject) => {
-      //this.registro = registro;
-      //this.registroAtualizado = true;
-      resolve();
-    });
-  }*/
+  reloadRegistroAposAtualizacao = () => {
+    this.loadRegistro();
+  };
 
 }

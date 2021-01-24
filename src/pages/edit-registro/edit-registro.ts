@@ -3,11 +3,11 @@ import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingC
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ItemDTO } from '../../models/item.dto';
 import { TipoRegistroDTO } from '../../models/tipo-registro.dto';
+import { RegistroDTO } from '../../models/registro.dto';
 import { RegistroService } from '../../services/domain/registro.service';
 import { ItemService } from '../../services/domain/item.service';
 import { TipoRegistroService } from '../../services/domain/tipo-registro.service';
 import { DateService } from '../../services/date.service';
-import { RegistroDTO } from '../../models/registro.dto';
 
 @IonicPage()
 @Component({
@@ -20,9 +20,6 @@ export class EditRegistroPage {
 
   itens: ItemDTO[];
   tiposDeRegistros: TipoRegistroDTO[];
-  registro: RegistroDTO;
-
-  callback: Function;
 
   constructor(
     public navCtrl: NavController,
@@ -48,7 +45,7 @@ export class EditRegistroPage {
     const alert = this.presentLoading();
 
     Promise.all([this.loadItems(), this.loadTiposDeRegistros(),
-    this.loadFormGroup()/*, this.loadFunctionCallback()*/])
+    this.loadFormGroup()])
       .then(() => alert.dismiss())
       .catch(error => {
         console.log(error.message);
@@ -56,19 +53,15 @@ export class EditRegistroPage {
       });
   }
 
-  /*loadFunctionCallback() {
-    this.callback = this.navParams.get("callback");
-  }*/
-
   loadFormGroup() {
-    this.registro = this.navParams.get('registro');
+    const registro: RegistroDTO = this.navParams.get('registro');
 
     this.formGroup.setValue({
-      id: this.registro.id,
-      valor: this.registro.valor,
-      dataHora: this.registro.dataHora,
-      itemId: this.registro.itemId,
-      tipoRegistroId: this.registro.tipoRegistroId
+      id: registro.id,
+      valor: registro.valor,
+      dataHora: registro.dataHora,
+      itemId: registro.itemId,
+      tipoRegistroId: registro.tipoRegistroId
     });
   }
 
@@ -129,21 +122,16 @@ export class EditRegistroPage {
               usuarioId: this.registro.usuarioId
             }*/
 
-            /*this.callback().then(() => {
-              this.navCtrl.pop();
-            });*/
-
-            this.navCtrl.pop();
+            this.navCtrl.pop().then(() => {
+              //this.navParams.get('callback')(registro);
+              this.navParams.get('reloadRegistroAposAtualizacao')();
+            });
           }
         }
       ]
     });
     alert.present();
   }
-
-  /*ionViewDidLeave() {
-    this.callback();
-  }*/
 
   presentLoading(): Loading {
     const loader = this.loadingCtrl.create({
