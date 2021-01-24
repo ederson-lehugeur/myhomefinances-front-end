@@ -32,7 +32,7 @@ export class NewItemPage {
 
   ionViewDidLoad() {
     this.categoriaService.findAll()
-      .subscribe(response => this.categorias = response,
+      .subscribe(response => this.categorias = response['content'],
         error => console.log(error));
   }
 
