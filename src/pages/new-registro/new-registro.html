@@ -39,7 +39,8 @@
     </p>
     <ion-item>
       <ion-label>Data*</ion-label>
-      <ion-datetime displayFormat="D MMM YYYY HH:mm" pickerFormat="D MMM YY HH:mm" formControlName="dataHora">
+      <!--ion-datetime displayFormat="D MMM YYYY HH:mm" pickerFormat="D MMM YY HH:mm" formControlName="dataHora"-->
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" pickerFormat="D MMM YY HH:mm" formControlName="dataHora">
       </ion-datetime>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.dataHora.dirty && formGroup.controls.dataHora.errors" margin-left>Data

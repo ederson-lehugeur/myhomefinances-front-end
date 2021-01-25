@@ -15,11 +15,11 @@ export class RegistroService {
 
     findAllPageable(
         page: number = 0,
-        size: number = 12,
+        size: number = 24,
         sort: string = 'dataHora',
         direction: string = 'DESC') {
 
-        return this.http.get(`${API_CONFIG.baseUrl}/registros?page=${page}&size=${size}&sort=${sort}&direction=${direction}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/registros?page=${page}&size=${size}&sort=${sort},${direction}`);
     }
 
     insert(registro: RegistroDTO) {

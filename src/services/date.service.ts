@@ -14,7 +14,7 @@ export class DateService {
         const min = '0'.concat(date.getMinutes().toString()).substr(-2);
         const sec = '0'.concat(date.getSeconds().toString()).substr(-2);
 
-        const mil = date.getMilliseconds();
+        const mil = '00'.concat(date.getMilliseconds().toString()).substr(-3);
 
         return `${day}/${month}/${year} ${hour}:${min}:${sec}.${mil}`;
     }

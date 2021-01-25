@@ -31,12 +31,12 @@ export class NewRegistroPage {
     public loadingCtrl: LoadingController,
     public dateService: DateService) {
 
-    const now = new Date(this.dateService.formatDateUTC(new Date()));
+    //const now = new Date(this.dateService.formatDateUTC(new Date()));
+    const now = new Date();
 
     this.formGroup = this.formBuilder.group({
       valor: ['', [Validators.required, Validators.pattern('^[0-9]{1,8}(\.[0-9]{1,2})?$')]],
-      //dataHora: [now.toISOString(), Validators.required],
-      dataHora: [now, Validators.required],
+      dataHora: [now.toISOString(), Validators.required],
       tipoRegistroId: ['1', Validators.required],
       itemId: ['', Validators.required]
     });
@@ -81,6 +81,7 @@ export class NewRegistroPage {
   createRegistro() {
     const dataFormatada = this.dateService.formatDate(new Date(this.formGroup.value.dataHora));
     this.formGroup.value.dataHora = dataFormatada;
+
     this.registroService.insert(this.formGroup.value)
       .subscribe(() => {
         this.showInsertOk();
