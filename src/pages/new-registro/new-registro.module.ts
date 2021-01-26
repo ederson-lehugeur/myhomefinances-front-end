@@ -10,4 +10,4 @@ import { NewRegistroPage } from './new-registro';
     IonicPageModule.forChild(NewRegistroPage),
   ],
 })
-export class NewRegistroPageModule {}
+export class NewRegistroPageModule { }
