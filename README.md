@@ -4,7 +4,7 @@ App para gerenciar as finanças pessoas. Protótipo feito com Ionic 3.
 
 ## Link de acesso
 
-[https://myhomefinances-front-end.vercel.app/]
+[MyHomeFinances](https://myhomefinances-front-end.vercel.app)
 
 ## Desenvolvedor
 
